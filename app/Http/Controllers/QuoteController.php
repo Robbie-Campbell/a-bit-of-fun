@@ -17,4 +17,8 @@ class QuoteController extends Controller
             'quote' => Quote::findOrFail($id)
         ]);
     }
+
+    public function test(){
+        return view('quote.test');
+    }
 }
