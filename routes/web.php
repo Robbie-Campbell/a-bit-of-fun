@@ -18,3 +18,4 @@ Route::get('list/', 'App\Http\Controllers\QuoteController@index');
 Route::get('single/{id}', 'App\Http\Controllers\QuoteController@show');
 
 //Auth::routes();
+Auth::routes();

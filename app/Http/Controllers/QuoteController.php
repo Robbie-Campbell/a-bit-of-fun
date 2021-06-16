@@ -12,13 +12,10 @@ class QuoteController extends Controller
         ]);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         return view('quote.single', [
             'quote' => Quote::findOrFail($id)
         ]);
-    }
-
-    public function test(){
-        return view('quote.test');
     }
 }
