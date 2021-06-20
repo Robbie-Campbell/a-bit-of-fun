@@ -34,6 +34,10 @@
                     @else
                         <span>{{ Auth::user()->name }}</span>
 
+
+
+                        <a href="{{ route('create') }}"
+                           class="no-underline hover:underline">Create Quote </a>
                         <a href="{{ route('logout') }}"
                            class="no-underline hover:underline"
                            onclick="event.preventDefault();

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Quote extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id', 'author', 'quote', 'category', 'image_src'];
 }

@@ -4,7 +4,7 @@
     <main class="sm:container sm:mx-auto sm:mt-10">
         <div class="flex h-screen justify-center items-center">
             <div class="max-w-md py-4 px-8 bg-gray-400 shadow-lg rounded-lg my-20 m-auto">
-                <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('store') }}">
+                <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="flex flex-wrap">
@@ -24,6 +24,10 @@
                         <textarea id="quote"
                                class="form-input w-full @error('quote') border-red-500 @enderror" name="quote"
                                   required autocomplete="quote"></textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="file" name="image" class="form-control">
                     </div>
 
                     <div class="flex flex-wrap">
