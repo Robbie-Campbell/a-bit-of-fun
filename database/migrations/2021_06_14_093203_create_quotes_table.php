@@ -15,10 +15,14 @@ class CreateQuotesTable extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->foreignId( 'user_id');
+            $table->integer('user_id');
+            $table->integer('category_id');
             $table->string('author');
-            $table->string('quote');
+            $table->text('quote');
+            $table->string('image_src');
+            $table->timestamps();
+            $table->foreign( 'user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

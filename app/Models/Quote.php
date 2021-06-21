@@ -9,5 +9,9 @@ class Quote extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'author', 'quote', 'category', 'image_src'];
+    protected $fillable = ['user_id', 'author', 'quote', 'category_id', 'image_src'];
+
+    public function category() {
+        return $this->hasOne('Category');
+    }
 }

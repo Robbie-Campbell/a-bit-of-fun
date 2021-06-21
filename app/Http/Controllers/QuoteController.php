@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class QuoteController extends Controller
 {
-    public function index(){
-        return view('quote.list', [
-            'quotes' => Quote::all()
-        ]);
-    }
-
     public function create(){
         return view('quotes.create', [
             'categories' => Category::all()
@@ -25,13 +19,14 @@ class QuoteController extends Controller
     public function store(Request $request){
         $imageName = time().'.'.$request->file('image')->extension();
         $request->file('image')->move(public_path('images'), $imageName);
-        return Quote::create([
-            'user_id' => Auth::user()->id,
-            'author' => $request->input('author'),
-            'quote' => $request->input('quote'),
-            'category' => $request->input('category'),
-            'image_src' => 'images/' . $imageName,
-        ]);
+        $quote = new Quote;
+        $quote->user_id = Auth::user()->id;
+        $quote->category_id = $request->category;
+        $quote->author = $request->input('author');
+        $quote->quote = $request->input('quote');
+        $quote->image_src = 'images/' . $imageName;
+        $quote->save();
+        return redirect()->route('single', [$quote->id]);
     }
 
     public function show($id)

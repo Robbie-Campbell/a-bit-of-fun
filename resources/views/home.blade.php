@@ -15,7 +15,7 @@
                             <div class="flex-auto ml-3 justify-evenly py-2 h-full">
                                 <div class="flex flex-wrap ">
                                     <div class="w-full flex-none text-xs text-blue-700 font-medium ">
-                                        Recent Quote
+                                        {{\App\Models\Category::find($quote->category_id)->title}}
                                     </div>
                                     <h2 class="flex-auto text-lg font-medium">{{$quote->quote}}</h2>
                                 </div>
