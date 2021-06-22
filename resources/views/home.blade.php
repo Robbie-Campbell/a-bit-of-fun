@@ -1,6 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .component {
+        font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    }
+
+    /* -- create the quotation marks -- */
+    blockquote:before,
+    blockquote:after {
+        font-family: FontAwesome;
+        position: absolute;
+        color: #000;
+        font-size: 22px;
+    }
+
+    blockquote:before {
+        content: "\f10d";
+        top: -12px;
+        margin-right: -20px;
+        right: 100%;
+    }
+
+    blockquote:after {
+        content: "\f10e";
+        margin-left: -20px;
+        left: 100%;
+        top: auto;
+        bottom: -20px;
+    }
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <main class="sm:container sm:mx-auto sm:mt-10">
     <div class="relative min-h-screen flex flex-col items-center justify-center ">
         <div class="grid mt-8  gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
@@ -8,22 +38,25 @@
                 <div class="flex flex-col">
                     <div class="bg-white shadow-md  rounded-3xl p-4">
                         <div class="flex-none lg:flex">
-                            <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
+                            <div style="min-width:30%;" class="h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
                                 <img src="{{asset($quote->image_src)}}"
                                      alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
                             </div>
-                            <div class="flex-auto ml-3 justify-evenly py-2 h-full">
-                                <div class="flex flex-wrap ">
-                                    <div class="w-full flex-none text-xs text-blue-700 font-medium ">
-                                        {{\App\Models\Category::find($quote->category_id)->title}}
-                                    </div>
-                                    <h2 class="flex-auto text-lg font-medium">{{$quote->quote}}</h2>
+                            <div class="flex-none ml-3 justify-evenly py-2 h-full">
+                                <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                    {{\App\Models\Category::find($quote->category_id)->title}}
+                                </div>
+                                <div class="flex flex-wrap text-right">
+                                    <section class="component mx-1 md:mx-10">
+                                        <blockquote  class="relative p-5 text-black w-full m-1">
+                                            {{$quote->quote}}
+                                            <br>
+                                            <cite> - {{$quote->author}}</cite>
+                                        </blockquote>
+                                    </section>
                                 </div>
                                 <p class="mt-3"></p>
                                 <div class="flex py-4  text-sm text-gray-600">
-                                    <div class="flex-1 inline-flex items-center">
-                                        <p class="">{{$quote->author}}</p>
-                                    </div>
                                     <div class="flex-1 inline-flex items-center">
                                         <p>{{$quote->created_at}}</p>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
