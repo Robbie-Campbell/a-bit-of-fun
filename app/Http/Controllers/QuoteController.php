@@ -38,9 +38,11 @@ class QuoteController extends Controller
     }
 
     public function dashboard() {
-        $user_quotes = Quote::all()->where('user_id',  Auth::user()->id);
+        $user = Auth::user();
+        $user_quotes = Quote::all()->where('user_id',  $user->id);
         return view('user.dashboard', [
-           'quotes' => $user_quotes
+           'quotes' => $user_quotes,
+           'user' => $user,
         ]);
     }
 }
