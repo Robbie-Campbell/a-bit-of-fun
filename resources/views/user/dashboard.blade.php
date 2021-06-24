@@ -26,7 +26,7 @@
                     <div class="bg-white shadow-md  rounded-3xl p-4">
                         <div class="flex-none lg:flex">
                             <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
-                                <img src="{{asset($quote->image_src)}}"
+                                <img style="max-height: 300px;" src="{{asset($quote->image_src)}}"
                                      alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
                             </div>
                             <div class="flex-auto ml-3 justify-evenly py-2 h-full">
@@ -65,7 +65,8 @@
                                     </div>
                                     <button
                                         class="mb-2 md:mb-0 bg-gray-900 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-gray-800"
-                                        type="button" aria-label="like"><a href="{{ url('quote/' . $quote->id) }}">Read more</a></button>
+                                        type="button" aria-label="like"><a href="{{ url('edit/' . $quote->id) }}">Update Post</a>
+                                    </button>
                                 </div>
                             </div>
                         </div>

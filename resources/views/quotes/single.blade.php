@@ -11,9 +11,17 @@
                     <h2 class="text-gray-800 text-3xl font-semibold">{{$quote->author}}</h2>
                     <p class="mt-2 text-gray-600">{{$quote->quote}}</p>
                 </div>
-                <div class="flex justify-end mt-4">
+                <div class="flex justify-end mt-4 border-b py-2">
                     <a href="#" class="text-xl font-medium text-indigo-500">{{$user->name}}</a>
                 </div>
+                @if($author)
+                    <div class="flex justify-end mt-4">
+                    <a
+                        class="text-xl font-medium text-indigo-500"
+                        type="button" href="{{ url('edit/' . $quote->id) }}">Update Post</a>
+                    </div>
+                @endif
+
             </div>
         </div>
     </main>
