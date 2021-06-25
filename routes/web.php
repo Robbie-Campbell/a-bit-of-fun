@@ -9,4 +9,8 @@ Route::get('create/', [App\Http\Controllers\QuoteController::class, 'create'])->
 Route::get('edit/{id}/', [App\Http\Controllers\QuoteController::class, 'edit'])->name('edit')->middleware('auth');
 Route::post('store/', [App\Http\Controllers\QuoteController::class, 'store'])->name('store');
 Route::post('update/{id}/', [App\Http\Controllers\QuoteController::class, 'update'])->name('update');
+Route::delete('delete/{id}/', [App\Http\Controllers\QuoteController::class, 'delete'])->name('delete');
+
+Route::get('quote/like/{id}/', [App\Http\Controllers\LikeController::class, 'like'])->name('reply.like');
+Route::get('quote/unlike/{id}/', [App\Http\Controllers\LikeController::class, 'unlike'])->name('reply.unlike');
 Auth::routes();

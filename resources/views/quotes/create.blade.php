@@ -3,11 +3,10 @@
 @section('content')
     <main class="sm:container sm:mx-auto sm:mt-10">
         <div class="flex h-screen justify-center items-center">
-            <div class="max-w-md py-4 px-8 bg-gray-700 text-white shadow-lg rounded-lg my-20 m-auto">
+            <div class="max-w-md py-4 px-8 bg-gray-500 text-white shadow-lg rounded-lg my-20 m-auto">
                 <h1 class="w-full bg- text-2xl text-center border-b border-white p-3 font-bold">Create a quote!</h1>
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
                     @csrf
-
                     <div class="flex flex-wrap ">
                         <label for="author" class="block  text-white text-sm font-bold mb-2 sm:mb-4">
                             Author:
@@ -16,7 +15,6 @@
                         <input id="author" type="text" class="form-input w-full text-black"
                                name="author" value="{{ old('author') }}" required autocomplete="author" autofocus>
                     </div>
-
                     <div class="flex flex-wrap">
                         <label for="quote" class="block  text-white text-sm font-bold mb-2 sm:mb-4">
                             Quote:

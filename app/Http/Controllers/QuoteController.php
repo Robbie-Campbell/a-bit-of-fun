@@ -53,6 +53,15 @@ class QuoteController extends Controller
         return redirect()->route('single', [$quote->id]);
     }
 
+    public function delete($id) {
+        $quote = Quote::findOrFail($id);
+        if(file_exists($quote->image_src)) {
+            unlink($quote->image_src);
+        }
+        $quote->delete();
+        return redirect()->route('dashboard');
+    }
+
     public function show($id) {
         $quote = Quote::findOrFail($id);
         $author = false;

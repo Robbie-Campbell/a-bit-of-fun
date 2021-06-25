@@ -40,4 +40,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function quotes() {
+        return $this->hasMany(Quote::class, 'user_id');
+    }
+
+    public function count_total_quotes() {
+        return $this->quotes()->count();
+    }
 }

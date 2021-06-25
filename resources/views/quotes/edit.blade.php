@@ -3,7 +3,7 @@
 @section('content')
     <main class="sm:container sm:mx-auto sm:mt-10">
         <div class="flex h-screen justify-center items-center">
-            <div class="max-w-md py-4 px-8 bg-gray-700 text-white shadow-lg rounded-lg my-20 m-auto">
+            <div class="max-w-md py-4 px-8 bg-gray-500 text-white shadow-lg rounded-lg my-20 m-auto">
                 <h1 class="w-full bg- text-2xl text-center border-b border-white p-3 font-bold">Edit This quote</h1>
                 <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
                     <img style="max-height: 300px;" src="{{asset($quote->image_src)}}"
