@@ -39,13 +39,13 @@
                     <div class="flex space-x-3 text-sm font-medium mt-4">
                         <button
                             class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
-                            type="button" aria-label="like"><a href="{{ route('single', $quote->id) }}">Read more</a>
+                            type="button" aria-label="like"><a href="{{ route('quote.single', $quote->id) }}">Read more</a>
                         </button>
                         <button
                             class="mb-2 md:mb-0 bg-yellow-400 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-yellow-500"
-                            type="button" aria-label="like"><a href="{{ route('edit', $quote->id) }}">Update Post</a>
+                            type="button" aria-label="like"><a href="{{ route('quote.edit', $quote->id) }}">Update Post</a>
                         </button>
-                        <form action="{{ route('delete', $quote->id) }}" method="POST">
+                        <form action="{{ route('quote.delete', $quote->id) }}" method="POST">
                             @csrf
                             @method('delete')
                             <button

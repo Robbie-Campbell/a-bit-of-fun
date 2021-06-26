@@ -21,7 +21,7 @@
         <header class="bg-blue-900 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
                 <div>
-                    <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
+                    <a href="{{ route('home') }}" class="text-lg font-semibold text-gray-100 no-underline">
                         The Quote Store
                     </a>
                 </div>
@@ -32,11 +32,11 @@
                             <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
-                        <a class="no-underline hover:underline" href="{{url('dashboard')}}">{{ __('Dashboard') }}</a>
+                        <a class="no-underline hover:underline" href="{{route('user.dashboard')}}">{{ __('Dashboard') }}</a>
 
 
 
-                        <a href="{{ route('create') }}"
+                        <a href="{{ route('quote.create') }}"
                            class="no-underline hover:underline">Create Quote </a>
                         <a href="{{ route('logout') }}"
                            class="no-underline hover:underline"

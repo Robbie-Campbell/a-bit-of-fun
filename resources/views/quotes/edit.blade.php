@@ -9,7 +9,7 @@
                     <img style="max-height: 300px;" src="{{asset($quote->image_src)}}"
                          alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
                 </div>
-                <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ url('update/' . $quote->id) }}" enctype="multipart/form-data">
+                <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('quote.update', $quote->id) }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="flex flex-wrap ">

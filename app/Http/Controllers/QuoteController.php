@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Profile;
 use App\Models\Quote;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class QuoteController extends Controller
         $quote->category_id = $request->category;
         $quote->author = $request->input('author');
         $quote->quote = $request->input('quote');
-        $quote->image_src = 'images/' . $imageName;
+        $quote->image_src = 'images/quotes/' . $imageName;
         $quote->save();
         return redirect()->route('single', [$quote->id]);
     }
@@ -48,7 +49,7 @@ class QuoteController extends Controller
         $quote->category_id = $request->category;
         $quote->author = $request->input('author');
         $quote->quote = $request->input('quote');
-        $quote->image_src = 'images/' . $imageName;
+        $quote->image_src = 'images/quotes/' . $imageName;
         $quote->update();
         return redirect()->route('single', [$quote->id]);
     }
@@ -81,6 +82,7 @@ class QuoteController extends Controller
         return view('user.dashboard', [
            'quotes' => $user_quotes,
            'user' => $user,
+           'profile' => Profile::all()->where('user_id', $user->id)->first()
         ]);
     }
 }

@@ -120,7 +120,7 @@
                                     </div>
                                     <button
                                         class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
-                                        type="button" aria-label="like"><a href="{{ route('single', $quote->id) }}">Read more</a>
+                                        type="button" aria-label="like"><a href="{{ route('quote.single', $quote->id) }}">Read more</a>
                                     </button>
                                 </div>
                             </div>

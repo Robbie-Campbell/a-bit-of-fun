@@ -6,13 +6,18 @@
             <div class="flex flex-col mt-2">
                 <div class="bg-white shadow-md  rounded-3xl p-4">
                     <div class="flex-auto ml-3 justify-evenly py-2 h-full">
-                        <div class="flex flex-wrap ">
-                            <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                        <div class="mx-auto h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
+                            <img style="max-height: 300px;" src="{{asset($profile->profile_image)}}"
+                                 alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
+                        </div>
+                        <div>
+                            <div class="w-full flex-none text-s text-blue-700 font-medium py-3">
                                 Username: {{$user->name}}
                             </div>
-                            <h2 class="flex-auto text-lg font-medium">Email: {{$user->email}}</h2>
+                            <h2 class="flex-auto text-lg font-medium border-b py-2">Email: {{$user->email}}</h2>
+                            <h2 class="flex-auto text-lg font-medium border-b py-2">First Name: @if($profile->first_name){{$profile->first_name}}@else Not set @endif</h2>
+                            <h2 class="flex-auto text-lg font-medium border-b py-2">Last Name: @if($profile->last_name){{$profile->last_name}}@else Not set @endif</h2>
                         </div>
-                        <p class="mt-3"></p>
                         <div class="flex py-4  text-sm text-gray-600">
                             <div class="flex-1 inline-flex items-center">
                                 <p class=""></p>
@@ -22,8 +27,12 @@
                     <h1 class="p-3 border-t">You have currently made <b>{{$user->count_total_quotes()}}</b> {{ Str::plural('quote', $user->count_total_quotes()) }}</h1>
                     <button
                         class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
-                        type="button" aria-label="like"><a href="{{ route('create') }}">Create a quote now</a>
+                        type="button" aria-label="like"><a href="{{ route('quote.create') }}">Create a quote now</a>
                     </button>
+{{--                    <button--}}
+{{--                        class="mb-2 md:mb-0 bg-green-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-green-800"--}}
+{{--                        type="button" aria-label="like"><a href="{{ route('user.edit') }}">Create a quote now</a>--}}
+{{--                    </button>--}}
                 </div>
             </div>
             @foreach($quotes as $quote)
@@ -82,13 +91,13 @@
                                     </div>
                                     <button
                                         class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
-                                        type="button" aria-label="like"><a href="{{ route('single', $quote->id) }}">Read more</a>
+                                        type="button" aria-label="like"><a href="{{ route('quote.single', $quote->id) }}">Read more</a>
                                     </button>
                                     <button
                                         class="mb-2 md:mb-0 bg-yellow-400 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-yellow-500"
-                                        type="button" aria-label="like"><a href="{{ route('edit', $quote->id) }}">Update Post</a>
+                                        type="button" aria-label="like"><a href="{{ route('quote.edit', $quote->id) }}">Update Post</a>
                                     </button>
-                                    <form action="{{ route('delete', $quote->id) }}" method="POST">
+                                    <form action="{{ route('quote.delete', $quote->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button
