@@ -17,7 +17,7 @@ class Quote extends Model
     }
 
     public function likes() {
-        return $this->hasMany(Like::class, 'quote_id');
+        return $this->hasMany(Like::class);
     }
 
     public function is_liked_by_auth_user() {

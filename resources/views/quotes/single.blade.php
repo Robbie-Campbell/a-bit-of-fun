@@ -5,7 +5,7 @@
         <div class="flex h-screen justify-center items-center">
             <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20 m-auto">
                 <div class="flex justify-center md:justify-end -mt-16">
-                    <img src="{{ asset($quote->image_src)}}" class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500">
+                    <img src="{{ asset($quote->image_src)}}" class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="Image of {{$quote->author}}">
                 </div>
                 <div>
                     <h2 class="text-gray-800 text-3xl font-semibold">{{$quote->author}}</h2>
@@ -23,9 +23,9 @@
                             </svg>
                         </span>
                         @if($quote->is_liked_by_auth_user())
-                            <a href="{{route('reply.unlike', $quote->id)}}">Unlike</a>
+                            <a href="{{route('likes.unlike', $quote->id)}}">Unlike</a>
                         @else
-                            <a href="{{route('reply.like', $quote->id)}}">Like</a>
+                            <a href="{{route('likes.like', $quote->id)}}">Like</a>
                         @endif
                         <span><b>{{$quote->count_total_likes()}} {{ Str::plural('Like', $quote->count_total_likes()) }}</b></span>
                     </button>

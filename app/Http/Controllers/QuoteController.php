@@ -27,7 +27,7 @@ class QuoteController extends Controller
 
     public function store(Request $request) {
         $imageName = time().'.'.$request->file('image')->extension();
-        $request->file('image')->move(public_path('images'), $imageName);
+        $request->file('image')->move(public_path('images/quotes'), $imageName);
         $quote = new Quote;
         $quote->user_id = Auth::user()->id;
         $quote->category_id = $request->category;
@@ -35,7 +35,7 @@ class QuoteController extends Controller
         $quote->quote = $request->input('quote');
         $quote->image_src = 'images/quotes/' . $imageName;
         $quote->save();
-        return redirect()->route('single', [$quote->id]);
+        return redirect()->route('quote.single', [$quote->id]);
     }
 
     public function update(Request $request, $id) {
@@ -51,7 +51,7 @@ class QuoteController extends Controller
         $quote->quote = $request->input('quote');
         $quote->image_src = 'images/quotes/' . $imageName;
         $quote->update();
-        return redirect()->route('single', [$quote->id]);
+        return redirect()->route('quote.single', [$quote->id]);
     }
 
     public function delete($id) {
@@ -60,7 +60,7 @@ class QuoteController extends Controller
             unlink($quote->image_src);
         }
         $quote->delete();
-        return redirect()->route('dashboard');
+        return redirect()->route('user.dashboard');
     }
 
     public function show($id) {
@@ -73,16 +73,6 @@ class QuoteController extends Controller
             'quote' => $quote,
             'user' => User::find($quote->user_id),
             'author' => $author
-        ]);
-    }
-
-    public function dashboard() {
-        $user = Auth::user();
-        $user_quotes = Quote::all()->where('user_id',  $user->id);
-        return view('user.dashboard', [
-           'quotes' => $user_quotes,
-           'user' => $user,
-           'profile' => Profile::all()->where('user_id', $user->id)->first()
         ]);
     }
 }

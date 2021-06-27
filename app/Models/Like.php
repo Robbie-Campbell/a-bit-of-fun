@@ -10,4 +10,8 @@ class Like extends Model
     public $fillable = ['quote_id', 'user_id'];
 
     use HasFactory;
+
+    public function quote() {
+        return $this->belongsTo(Quote::class);
+    }
 }

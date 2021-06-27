@@ -1,36 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    .component {
-        font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-    }
-
-    /* -- create the quotation marks -- */
-    blockquote:before,
-    blockquote:after {
-        font-family: FontAwesome;
-        position: absolute;
-        color: #000;
-        font-size: 22px;
-    }
-
-    blockquote:before {
-        content: "\f10d";
-        top: -12px;
-        margin-right: -20px;
-        right: 100%;
-    }
-
-    blockquote:after {
-        content: "\f10e";
-        margin-left: -20px;
-        left: 100%;
-        top: auto;
-        bottom: -20px;
-    }
-</style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <div style="background-image: url('https://wallpapercave.com/wp/wp4506801.jpg'); min-height: 500px;" class="bg-indigo-100 bg-cover bg-no-repeat">
     <div class="container px-4 mx-auto py-20">
         <div class="text-center max-w-2xl mx-auto">
@@ -75,7 +45,7 @@
                         <div class="flex-none lg:flex">
                             <div style="min-width:30%;" class="h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
                                 <img style=" max-height: 300px;" src="{{asset($quote->image_src)}}"
-                                     alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
+                                     alt="Image of {{$quote->author}}" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
                             </div>
                             <div class="flex-none ml-3 justify-evenly py-2 h-full p-3">
                                 <div class="w-full flex-none text-xs text-blue-700 font-medium ">
@@ -104,9 +74,9 @@
                                                     </svg>
                                                 </span>
                                                     @if($quote->is_liked_by_auth_user())
-                                                        <a href="{{route('reply.unlike', $quote->id)}}">Unlike</a>
+                                                        <a href="{{route('likes.unlike', $quote->id)}}">Unlike</a>
                                                     @else
-                                                        <a href="{{route('reply.like', $quote->id)}}">Like</a>
+                                                        <a href="{{route('likes.like', $quote->id)}}">Like</a>
                                                     @endif
                                                     <span><b>{{$quote->count_total_likes()}} {{ Str::plural('Like', $quote->count_total_likes()) }}</b></span>
 

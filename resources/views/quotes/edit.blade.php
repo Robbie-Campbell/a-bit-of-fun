@@ -7,7 +7,7 @@
                 <h1 class="w-full bg- text-2xl text-center border-b border-white p-3 font-bold">Edit This quote</h1>
                 <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
                     <img style="max-height: 300px;" src="{{asset($quote->image_src)}}"
-                         alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
+                         alt="Image of {{$quote->author}}" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
                 </div>
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('quote.update', $quote->id) }}" enctype="multipart/form-data">
                     @csrf

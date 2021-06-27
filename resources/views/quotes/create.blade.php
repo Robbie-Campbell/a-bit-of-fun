@@ -13,7 +13,7 @@
                         </label>
 
                         <input id="author" type="text" class="form-input w-full text-black"
-                               name="author" value="{{ old('author') }}" required autocomplete="author" autofocus>
+                               name="author" value="{{ old('author') }}" required autofocus>
                     </div>
                     <div class="flex flex-wrap">
                         <label for="quote" class="block  text-white text-sm font-bold mb-2 sm:mb-4">
@@ -22,7 +22,7 @@
 
                         <textarea id="quote"
                                class="form-input w-full  text-black" name="quote"
-                                  required autocomplete="quote"></textarea>
+                                  required></textarea>
                     </div>
 
                     <div class="overflow-hidden relative w-64 mt-4 mb-4">

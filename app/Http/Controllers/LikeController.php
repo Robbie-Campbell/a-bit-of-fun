@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Like;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Quote;
 use Illuminate\Support\Facades\Auth;
@@ -32,5 +33,19 @@ class LikeController extends Controller
         Session::flash('success', 'You have unliked the quote');
 
         return redirect()->back();
+    }
+
+
+    public function user_likes($id) {
+        $user = User::find($id);
+        $likes = Like::with('quote')->get()->where('user_id', $id);
+        $quotes = [];
+        foreach($likes as $like) {
+            array_push($quotes, Quote::find($like->quote_id));
+        }
+        return view('user.likes', [
+            'user' => $user,
+            'quotes' => $quotes
+        ]);
     }
 }

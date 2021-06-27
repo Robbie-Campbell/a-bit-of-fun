@@ -8,7 +8,7 @@
                     <div class="flex-auto ml-3 justify-evenly py-2 h-full">
                         <div class="mx-auto h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
                             <img style="max-height: 300px;" src="{{asset($profile->profile_image)}}"
-                                 alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
+                                 alt="Image of {{$profile->first_name}}" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
                         </div>
                         <div>
                             <div class="w-full flex-none text-s text-blue-700 font-medium py-3">
@@ -29,10 +29,14 @@
                         class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
                         type="button" aria-label="like"><a href="{{ route('quote.create') }}">Create a quote now</a>
                     </button>
-{{--                    <button--}}
-{{--                        class="mb-2 md:mb-0 bg-green-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-green-800"--}}
-{{--                        type="button" aria-label="like"><a href="{{ route('user.edit') }}">Create a quote now</a>--}}
-{{--                    </button>--}}
+                    <button
+                        class="mb-2 md:mb-0 bg-green-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-green-800"
+                        type="button" aria-label="like"><a href="{{ route('user.edit') }}">Edit Your Profile</a>
+                    </button>
+                    <button
+                        class="mb-2 md:mb-0 bg-red-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-800"
+                        type="button" aria-label="like"><a href="{{ route('likes.user_likes', $user->id) }}">View User Likes</a>
+                    </button>
                 </div>
             </div>
             @foreach($quotes as $quote)
@@ -41,7 +45,7 @@
                         <div class="flex-none lg:flex">
                             <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
                                 <img style="max-height: 300px;" src="{{asset($quote->image_src)}}"
-                                     alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
+                                     alt="Image of {{$quote->author}}" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
                             </div>
                             <div class="flex-auto ml-3 justify-evenly py-2 h-full">
                                 <div class="flex flex-wrap ">
@@ -76,9 +80,9 @@
                                                     </svg>
                                                 </span>
                                                 @if($quote->is_liked_by_auth_user())
-                                                    <a href="{{route('reply.unlike', $quote->id)}}">Unlike</a>
+                                                    <a href="{{route('likes.unlike', $quote->id)}}">Unlike</a>
                                                 @else
-                                                    <a href="{{route('reply.like', $quote->id)}}">Like</a>
+                                                    <a href="{{route('likes.like', $quote->id)}}">Like</a>
                                                 @endif
                                                 <span><b>{{$quote->count_total_likes()}} {{ Str::plural('Like', $quote->count_total_likes()) }}</b></span>
                                             </button>
