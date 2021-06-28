@@ -9,10 +9,10 @@
                 </div>
                 <div>
                     <h2 class="text-gray-800 text-3xl font-semibold">{{$quote->author}}</h2>
-                    <p class="mt-2 text-gray-600">{{$quote->quote}}</p>
+                    <p class="mt-2 text-gray-600">"{{$quote->quote}}"</p>
                 </div>
                 <div class="flex justify-end mt-4 border-b py-2">
-                    <a href="#" class="text-xl font-medium text-indigo-500">{{$user->name}}</a>
+                    <a href="{{route('user.dashboard', $user->id)}}" class="text-xl font-medium text-indigo-500">{{$user->name}}</a>
                 </div>
                 @auth
                     <button
@@ -41,18 +41,20 @@
                             class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
                             type="button" aria-label="like"><a href="{{ route('quote.single', $quote->id) }}">Read more</a>
                         </button>
-                        <button
-                            class="mb-2 md:mb-0 bg-yellow-400 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-yellow-500"
-                            type="button" aria-label="like"><a href="{{ route('quote.edit', $quote->id) }}">Update Post</a>
-                        </button>
-                        <form action="{{ route('quote.delete', $quote->id) }}" method="POST">
-                            @csrf
-                            @method('delete')
+                        @if($user->is_owner(Auth::id()))
                             <button
-                                class="mb-2 md:mb-0 bg-red-600 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-700"
-                                type="submit">Delete Post
+                                class="mb-2 md:mb-0 bg-yellow-400 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-yellow-500"
+                                type="button" aria-label="like"><a href="{{ route('quote.edit', $quote->id) }}">Update Post</a>
                             </button>
-                        </form>
+                            <form action="{{ route('quote.delete', $quote->id) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button
+                                    class="mb-2 md:mb-0 bg-red-600 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-700"
+                                    type="submit">Delete Post
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 @endif
 

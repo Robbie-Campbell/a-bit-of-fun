@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function dashboard() {
-        $user = Auth::user();
+    public function dashboard($id) {
+        $user = User::findOrFail($id);
         $user_quotes = Quote::all()->where('user_id',  $user->id);
         return view('user.dashboard', [
             'quotes' => $user_quotes,
@@ -38,6 +38,6 @@ class UserController extends Controller
         $profile->first_name = $request->input('first_name');
         $profile->last_name = $request->input('last_name');
         $profile->update();
-        return redirect()->route('user.dashboard');
+        return redirect()->route('user.dashboard', Auth::id());
     }
 }

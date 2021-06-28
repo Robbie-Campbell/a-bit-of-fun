@@ -12,15 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class QuoteController extends Controller
 {
     public function create() {
-        return view('quotes.create', [
-            'categories' => Category::all()
-        ]);
+        return view('quotes.create');
     }
 
     public function edit($id) {
         $quote = Quote::findOrFail($id);
         return view('quotes.edit', [
-            'categories' => Category::all(),
             'quote' => $quote,
         ]);
     }
@@ -44,7 +41,7 @@ class QuoteController extends Controller
             unlink($quote->image_src);
         }
         $imageName = time().'.'.$request->file('image')->extension();
-        $request->file('image')->move(public_path('images'), $imageName);
+        $request->file('image')->move(public_path('images/quotes'), $imageName);
         $quote->id = $id;
         $quote->category_id = $request->category;
         $quote->author = $request->input('author');
@@ -73,6 +70,14 @@ class QuoteController extends Controller
             'quote' => $quote,
             'user' => User::find($quote->user_id),
             'author' => $author
+        ]);
+    }
+
+    public function category($id) {
+        $cat = Category::find($id);
+        return view('quotes.list', [
+            'quotes' => Quote::all()->where('category_id', $id),
+            'cat' => $cat->title
         ]);
     }
 }

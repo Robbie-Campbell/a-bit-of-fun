@@ -51,7 +51,7 @@
                                 <div class="w-full flex-none text-xs text-blue-700 font-medium ">
                                     {{\App\Models\Category::find($quote->category_id)->title}}
                                 </div>
-                                <p class="mt-3">{{Str::limit($quote->quote, 50)}}</p>
+                                <p class="mt-3">"{{Str::limit($quote->quote, 50)}}"</p>
                                 <div class="flex py-4  text-sm text-gray-600">
                                     <div class="flex-1 inline-flex items-center">
                                         <p>{{$quote->created_at}}</p>

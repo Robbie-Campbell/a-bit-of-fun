@@ -3,7 +3,7 @@
 @section('content')
     <main class="sm:container sm:mx-auto sm:mt-10">
         <div class="relative min-h-screen flex flex-col items-center ">
-            <div class="flex flex-col mt-2">
+            <div class="flex flex-col mt-2 text-center">
                 <div class="bg-white shadow-md  rounded-3xl p-4">
                     <div class="flex-auto ml-3 justify-evenly py-2 h-full">
                         <div class="mx-auto h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
@@ -24,23 +24,27 @@
                             </div>
                         </div>
                     </div>
-                    <h1 class="p-3 border-t">You have currently made <b>{{$user->count_total_quotes()}}</b> {{ Str::plural('quote', $user->count_total_quotes()) }}</h1>
-                    <button
-                        class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
-                        type="button" aria-label="like"><a href="{{ route('quote.create') }}">Create a quote now</a>
-                    </button>
-                    <button
-                        class="mb-2 md:mb-0 bg-green-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-green-800"
-                        type="button" aria-label="like"><a href="{{ route('user.edit') }}">Edit Your Profile</a>
-                    </button>
-                    <button
+                    @if($user->is_owner(Auth::id()))
+                        <h1 class="p-3 border-t">You have currently made <b>{{$user->count_total_quotes()}}</b> {{ Str::plural('quote', $user->count_total_quotes()) }}</h1>
+                        <button
+                            class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
+                            type="button" aria-label="like"><a href="{{ route('quote.create') }}">Create a quote now</a>
+                        </button>
+                        <button
+                            class="mb-2 md:mb-0 bg-green-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-green-800"
+                            type="button" aria-label="like"><a href="{{ route('user.edit') }}">Edit Your Profile</a>
+                        </button>
+                    @else
+                        <h1 class="p-3 border-t">This User has made <b>{{$user->count_total_quotes()}}</b> {{ Str::plural('quote', $user->count_total_quotes()) }}</h1>
+                    @endif
+                        <button
                         class="mb-2 md:mb-0 bg-red-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-800"
                         type="button" aria-label="like"><a href="{{ route('likes.user_likes', $user->id) }}">View User Likes</a>
                     </button>
                 </div>
             </div>
             @foreach($quotes as $quote)
-                <div class="flex flex-col w-full mt-5">
+                <div class="flex flex-col mt-5">
                     <div class="bg-white shadow-md  rounded-3xl p-4">
                         <div class="flex-none lg:flex">
                             <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
@@ -97,18 +101,20 @@
                                         class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
                                         type="button" aria-label="like"><a href="{{ route('quote.single', $quote->id) }}">Read more</a>
                                     </button>
-                                    <button
-                                        class="mb-2 md:mb-0 bg-yellow-400 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-yellow-500"
-                                        type="button" aria-label="like"><a href="{{ route('quote.edit', $quote->id) }}">Update Post</a>
-                                    </button>
-                                    <form action="{{ route('quote.delete', $quote->id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
+                                    @if($user->is_owner(Auth::id()))
                                         <button
-                                            class="mb-2 md:mb-0 bg-red-600 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-700"
-                                            type="submit">Delete Post
+                                            class="mb-2 md:mb-0 bg-yellow-400 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-yellow-500"
+                                            type="button" aria-label="like"><a href="{{ route('quote.edit', $quote->id) }}">Update Post</a>
                                         </button>
-                                    </form>
+                                        <form action="{{ route('quote.delete', $quote->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button
+                                                class="mb-2 md:mb-0 bg-red-600 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-700"
+                                                type="submit">Delete Post
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>

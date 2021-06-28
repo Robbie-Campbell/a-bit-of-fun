@@ -16,36 +16,76 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
 </head>
+<style>
+    .dropdown:focus-within .dropdown-menu {
+        opacity:1;
+        transform: translate(0) scale(1);
+        visibility: visible;
+    }
+</style>
 <body class="bg-gray-100 h-screen antialiased leading-none font-sans">
     <div id="app">
         <header class="bg-blue-900 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
-                <div>
+                <div class="flex">
                     <a href="{{ route('home') }}" class="text-lg font-semibold text-gray-100 no-underline">
                         The Quote Store
                     </a>
                 </div>
+
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
-                    @guest
-                        <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        @if (Route::has('register'))
-                            <a class="no-underline hover:underline" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        @endif
-                    @else
-                        <a class="no-underline hover:underline" href="{{route('user.dashboard')}}">{{ __('Dashboard') }}</a>
-
-
-
-                        <a href="{{ route('quote.create') }}"
-                           class="no-underline hover:underline">Create Quote </a>
-                        <a href="{{ route('logout') }}"
-                           class="no-underline hover:underline"
-                           onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                            {{ csrf_field() }}
-                        </form>
-                    @endguest
+                    <div class="z-30 ml-5 relative inline-block text-left dropdown">
+                        <span class="rounded-md shadow-sm">
+                            <button class=" bg-blue-900 inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-blue-800"
+                                    type="button" aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-117">
+                                <span class="text-white">Categories</span>
+                                <svg class="w-5 h-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+                        </span>
+                        <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95 bg-blue-900">
+                            <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
+                                <div class="py-1">
+                                    @foreach($categories as $category)
+                                        <a href="{{route('quote.category', $category->id)}}" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left  hover:bg-gray-200"  role="menuitem" >{{$category->title}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="z-30 ml-5 relative inline-block text-left dropdown">
+                        <span class="rounded-md shadow-sm">
+                            <button class=" bg-blue-900 inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-blue-800"
+                                    type="button" aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-117">
+                                <span class="text-white">Options</span>
+                                <svg class="w-5 h-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="white"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+                        </span>
+                        <div class="opacity-0 invisible dropdown-menu transition-all duration-300 transform origin-top-right -translate-y-2 scale-95 bg-blue-900">
+                            <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none" aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
+                                @auth
+                                    <div class="px-4 py-3">
+                                        <p class="text-sm leading-5">Signed in as</p>
+                                        <p class="text-sm font-medium leading-5 text-gray-900 truncate">{{Auth::user()->email}}</p>
+                                    </div>
+                                @endauth
+                                <div class="py-1">
+                                    @guest
+                                        <a href="{{ route('login') }}" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-200"  role="menuitem" >{{ __('Login') }}</a>
+                                        <a href="{{ route('register') }}" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-200"  role="menuitem" >{{ __('Register') }}</a>
+                                    @else
+                                        <a href="{{ route('quote.create') }}" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-200"  role="menuitem" >Create a Quote</a>
+                                        <a href="{{ route('user.dashboard', Auth::id()) }}" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left  hover:bg-gray-200"  role="menuitem" >Your Dashboard</a>
+                                        <div class="py-1 border-t">
+                                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:bg-gray-200"  role="menuitem" >Sign out</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </div>
+                                    @endguest
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </nav>
             </div>
         </header>
