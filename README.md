@@ -10,6 +10,12 @@ I have fiddled with wordaday alot for the last year, but in terms of inspiration
 
 This application is NOT intended to be super sophisticated, nor does it intend to follow best practices, but i am going to fiddle about with this and just enjoy learning a new framework. The idea of the application is it's a place to store quotes that you like. Nothing more than that. Just a couple of tables, some CRUD and a nice login system.
 
+# We now have some more cool stuff!
+
+> Like System
+
+> Subscription System
+
 ### This is a celebration artefact, so don't expect much!
 
 ## :shipit: Happy coding! :shipit:
