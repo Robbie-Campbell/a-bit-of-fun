@@ -66,20 +66,16 @@
                                 <div class="flex space-x-3 text-sm font-medium">
                                     <div class="flex-auto flex space-x-3">
                                         @auth
-                                            <button
-                                                class="mb-2 md:mb-0 bg-white px-5 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2 ">
+                                            <button data-id="{{$quote->id}}"
+                                                class="mb-2 md:mb-0 bg-white px-5 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2
+                                                @if($quote->is_liked_by_auth_user()) unlike @else like @endif">
                                                 <span class="@if($quote->is_liked_by_auth_user()) text-red-600 hover:text-red-700 @else text-red-100 hover:text-red-500 @endif rounded-lg">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                                      <path data-id="{{$quote->id}}" fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                                                     </svg>
                                                 </span>
-                                                    @if($quote->is_liked_by_auth_user())
-                                                        <a href="{{route('likes.unlike', $quote->id)}}">Unlike</a>
-                                                    @else
-                                                        <a href="{{route('likes.like', $quote->id)}}">Like</a>
-                                                    @endif
-                                                    <span><b>{{$quote->count_total_likes()}} {{ Str::plural('Like', $quote->count_total_likes()) }}</b></span>
-
+                                                <span class="text{{$quote->id}}" data-id="{{$quote->id}}" class="ml-2">@if($quote->is_liked_by_auth_user()) Unlike @else Like @endif</span>
+                                                <span><b data-id="{{$quote->id}}"><span class="total{{ $quote->id }}">{{$quote->count_total_likes()}}</b></span> {{ Str::plural('Like', $quote->count_total_likes()) }}
                                             </button>
                                         @endauth
                                         @guest

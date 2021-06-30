@@ -19,7 +19,7 @@ class LikeController extends Controller
 
         Session::flash('success', 'You have liked the quote');
 
-        return redirect()->back();
+        return back();
     }
 
     public function unlike($id) {
@@ -31,8 +31,6 @@ class LikeController extends Controller
         $like->delete();
 
         Session::flash('success', 'You have unliked the quote');
-
-        return redirect()->back();
     }
 
 

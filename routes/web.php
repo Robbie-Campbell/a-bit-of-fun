@@ -20,7 +20,7 @@ Route::post('quote/update/{id}/', [App\Http\Controllers\QuoteController::class, 
 Route::delete('quote/delete/{id}/', [App\Http\Controllers\QuoteController::class, 'delete'])->name('quote.delete');
 
 # Like Routes
-Route::get('quote/like/{id}/', [App\Http\Controllers\LikeController::class, 'like'])->name('likes.like');
-Route::get('quote/unlike/{id}/', [App\Http\Controllers\LikeController::class, 'unlike'])->name('likes.unlike');
+Route::post('quote/like/{id}/', [App\Http\Controllers\LikeController::class, 'like'])->name('likes.like');
+Route::post('quote/unlike/{id}/', [App\Http\Controllers\LikeController::class, 'unlike'])->name('likes.unlike');
 Route::get('user/likes/{id}/', [App\Http\Controllers\LikeController::class, 'user_likes'])->name('likes.user_likes');
 Auth::routes();
