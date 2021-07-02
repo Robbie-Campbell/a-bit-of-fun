@@ -36,11 +36,29 @@
                         </button>
                     @else
                         <h1 class="p-3 border-t">This User has made <b>{{$user->count_total_quotes()}}</b> {{ Str::plural('quote', $user->count_total_quotes()) }}</h1>
+                        <h1 class="p-3 border-t">This User has <b>{{$user->count_total_followers()}}</b> {{ Str::plural('follower', $user->count_total_followers()) }}</h1>
                     @endif
-                        <button
+                    <button
                         class="mb-2 md:mb-0 bg-red-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-800"
                         type="button" aria-label="like"><a href="{{ route('likes.user_likes', $user->id) }}">View User Likes</a>
                     </button>
+                    @if(!$user->is_owner(Auth::id()) && Auth::user()->is_following($user->id))
+                        <form method="POST" action="{{ route('user.follow', $user->id) }}">
+                            @csrf
+                            <button
+                                class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
+                                type="submit"  aria-label="like">Follow This User
+                            </button>
+                        </form>
+                    @elseif(!Auth::user()->is_following($user->id))
+                        <form method="POST" action="{{ route('user.unfollow', $user->id) }}">
+                            @csrf
+                            <button
+                                class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
+                                type="submit"  aria-label="like">Unfollow this user
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
             @foreach($quotes as $quote)
@@ -102,11 +120,6 @@
                                                 </span>
                                             </div>
                                         @endauth
-                                        @guest
-                                            <button disabled class="mb-2 md:mb-0 bg-white px-5 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2 ">
-                                                <span><b>{{$quote->count_total_likes()}} {{ Str::plural('Like', $quote->count_total_likes()) }}</b></span>
-                                            </button>
-                                        @endguest
                                     </div>
                                     <button
                                         class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"

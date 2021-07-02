@@ -46,8 +46,28 @@ class User extends Authenticatable
         return $this->hasMany(Quote::class, 'user_id');
     }
 
+    public function follows()
+    {
+        return $this->belongsToMany($this, 'follows', 'user_id', 'follower_id');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany($this, 'follows', 'user_id', 'follower_id');
+    }
+
+    public function count_total_followers() {
+        return $this->followers() ->count();
+    }
+
     public function count_total_quotes() {
         return $this->quotes()->count();
+    }
+
+    public function is_following($id) {
+        $check_exists = ['follower_id' => Auth::id(), 'user_id' => $id];
+        $is_following = Follow::where($check_exists)->first();
+        return is_null($is_following);
     }
 
     public function is_owner($id) {

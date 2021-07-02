@@ -9,6 +9,8 @@ Route::get('/', [App\Http\Controllers\NavigationController::class, 'index'])->na
 Route::get('user/dashboard/{id}', [App\Http\Controllers\UserController::class, 'dashboard'])->name('user.dashboard')->middleware('auth');
 Route::get('user/edit/', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit')->middleware('auth');
 Route::post('user/update/', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+Route::post('user/follow/{id}/', [App\Http\Controllers\UserController::class, 'follow'])->name('user.follow');
+Route::post('user/unfollow/{id}/', [App\Http\Controllers\UserController::class, 'unfollow'])->name('user.unfollow');
 
 # Quote Routes
 Route::get('quote/single/{id}', [App\Http\Controllers\QuoteController::class, 'show'])->name('quote.single');

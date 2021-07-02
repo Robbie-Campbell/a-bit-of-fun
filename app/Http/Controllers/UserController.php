@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\Profile;
 use App\Models\Quote;
 use App\Models\User;
@@ -39,5 +40,13 @@ class UserController extends Controller
         $profile->last_name = $request->input('last_name');
         $profile->update();
         return redirect()->route('user.dashboard', Auth::id());
+    }
+
+    public function follow($id) {
+        Follow::create([
+            'follower_id' => Auth::id(),
+            'user_id' => $id
+        ]);
+        return redirect()->back();
     }
 }

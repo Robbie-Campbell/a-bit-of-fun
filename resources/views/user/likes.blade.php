@@ -29,8 +29,12 @@
                                                 </svg>
                                             </div>
                                             <span class="mb-2 md:mb-0 bg-white px-5 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2">
-                                            <b data-id="{{$quote->id}}"><span class="total{{ $quote->id }} mr-1">{{$quote->count_total_likes()}}</span></b> <span id="total_likes_text{{$quote->id}}">{{ Str::plural('Like', $quote->count_total_likes()) }}</span>
-                                        </span>
+                                            @auth
+                                                <span class="mb-2 md:mb-0 bg-white px-5 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2">
+                                                    <b data-id="{{$quote->id}}"><span class="total{{ $quote->id }} mr-1">{{$quote->count_total_likes()}}</span></b> <span id="total_likes_text{{$quote->id}}">{{ Str::plural('Like', $quote->count_total_likes()) }}</span>
+                                                </span>
+                                            @endauth
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="flex p-4 pb-2 border-t border-gray-200 w-full"></div>

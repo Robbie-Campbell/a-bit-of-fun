@@ -92,11 +92,6 @@
                                                 <span data-id="{{$quote->id}}" class="ml-2">Unlike</span>
                                             </button>
                                         @endauth
-                                        @guest
-                                            <button disabled class="mb-2 md:mb-0 bg-white px-5 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2 ">
-                                                <span><b>{{$quote->count_total_likes()}} {{ Str::plural('Like', $quote->count_total_likes()) }}</b></span>
-                                            </button>
-                                        @endguest
                                     </div>
                                     <button
                                         class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
