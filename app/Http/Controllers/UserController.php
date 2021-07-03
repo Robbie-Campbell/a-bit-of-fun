@@ -49,4 +49,14 @@ class UserController extends Controller
         ]);
         return redirect()->back();
     }
+
+    public function unfollow($id) {
+        $follow = Follow::where([
+            'follower_id' => Auth::id(),
+            'user_id' => $id
+        ])->first();
+        echo $follow;
+        $follow->delete();
+        return redirect()->back();
+    }
 }

@@ -50,7 +50,7 @@
                                 type="submit"  aria-label="like">Follow This User
                             </button>
                         </form>
-                    @elseif(!Auth::user()->is_following($user->id))
+                    @elseif(!$user->is_owner(Auth::id()) && !Auth::user()->is_following($user->id))
                         <form method="POST" action="{{ route('user.unfollow', $user->id) }}">
                             @csrf
                             <button
