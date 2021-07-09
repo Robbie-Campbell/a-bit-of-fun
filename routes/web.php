@@ -8,9 +8,13 @@ Route::get('/', [App\Http\Controllers\NavigationController::class, 'index'])->na
 # User Routes
 Route::get('user/dashboard/{id}', [App\Http\Controllers\UserController::class, 'dashboard'])->name('user.dashboard')->middleware('auth');
 Route::get('user/edit/', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit')->middleware('auth');
-Route::post('user/update/', [App\Http\Controllers\UserController::class, 'update'])->name('user.update')->middleware('auth');;
-Route::post('user/follow/{id}/', [App\Http\Controllers\UserController::class, 'follow'])->name('user.follow')->middleware('auth');;
-Route::post('user/unfollow/{id}/', [App\Http\Controllers\UserController::class, 'unfollow'])->name('user.unfollow')->middleware('auth');;
+Route::post('user/update/', [App\Http\Controllers\UserController::class, 'update'])->name('user.update')->middleware('auth');
+
+# Follower Controller
+Route::post('user/follow/{id}/', [App\Http\Controllers\FollowController::class, 'follow'])->name('user.follow')->middleware('auth');
+Route::post('user/unfollow/{id}/', [App\Http\Controllers\FollowController::class, 'unfollow'])->name('user.unfollow')->middleware('auth');
+Route::get('user/following/{id}/', [App\Http\Controllers\FollowController::class, 'following'])->name('user.following')->middleware('auth');
+Route::get('user/followers/{id}/', [App\Http\Controllers\FollowController::class, 'followers'])->name('user.followers')->middleware('auth');
 
 # Quote Routes
 Route::get('quote/single/{id}', [App\Http\Controllers\QuoteController::class, 'show'])->name('quote.single');

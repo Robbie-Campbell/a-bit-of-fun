@@ -41,22 +41,4 @@ class UserController extends Controller
         $profile->update();
         return redirect()->route('user.dashboard', Auth::id());
     }
-
-    public function follow($id) {
-        Follow::create([
-            'follower_id' => Auth::id(),
-            'user_id' => $id
-        ]);
-        return redirect()->back();
-    }
-
-    public function unfollow($id) {
-        $follow = Follow::where([
-            'follower_id' => Auth::id(),
-            'user_id' => $id
-        ])->first();
-        echo $follow;
-        $follow->delete();
-        return redirect()->back();
-    }
 }

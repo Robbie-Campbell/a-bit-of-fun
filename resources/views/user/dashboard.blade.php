@@ -59,6 +59,14 @@
                             </button>
                         </form>
                     @endif
+                    <button
+                        class="mb-2 md:mb-0 bg-red-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-800"
+                        type="button" aria-label="like"><a href="{{ route('user.following', $user->id) }}">View User Follows</a>
+                    </button>
+                    <button
+                        class="mb-2 md:mb-0 bg-red-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-800"
+                        type="button" aria-label="like"><a href="{{ route('user.followers', $user->id) }}">See Who They Follow</a>
+                    </button>
                 </div>
             </div>
             @foreach($quotes as $quote)
