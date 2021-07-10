@@ -46,9 +46,9 @@ class User extends Authenticatable
         return $this->hasMany(Quote::class, 'user_id');
     }
 
-    public function follows()
+    public function following()
     {
-        return $this->belongsToMany($this, 'follows', 'user_id', 'follower_id');
+        return $this->belongsToMany($this, 'follows', 'follower_id', 'user_id');
     }
 
     public function followers()
@@ -57,7 +57,11 @@ class User extends Authenticatable
     }
 
     public function count_total_followers() {
-        return $this->followers() ->count();
+        return $this->followers()->count();
+    }
+
+    public function count_total_following() {
+        return $this->following()->count();
     }
 
     public function count_total_quotes() {

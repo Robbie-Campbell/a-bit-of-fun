@@ -26,6 +26,8 @@
                     </div>
                     @if($user->is_owner(Auth::id()))
                         <h1 class="p-3 border-t">You have currently made <b>{{$user->count_total_quotes()}}</b> {{ Str::plural('quote', $user->count_total_quotes()) }}</h1>
+                        <h1 class="p-3 border-t">You Have <b>{{$user->count_total_followers()}}</b> {{ Str::plural('follower', $user->count_total_followers()) }}</h1>
+                        <h1 class="p-3 border-t">You Are Following <b>{{$user->count_total_following()}}</b></h1>
                         <button
                             class="mb-2 md:mb-0 bg-blue-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-blue-800"
                             type="button" aria-label="like"><a href="{{ route('quote.create') }}">Create a quote now</a>
@@ -37,6 +39,7 @@
                     @else
                         <h1 class="p-3 border-t">This User has made <b>{{$user->count_total_quotes()}}</b> {{ Str::plural('quote', $user->count_total_quotes()) }}</h1>
                         <h1 class="p-3 border-t">This User has <b>{{$user->count_total_followers()}}</b> {{ Str::plural('follower', $user->count_total_followers()) }}</h1>
+                        <h1 class="p-3 border-t">This User is Following <b>{{$user->count_total_following()}}</b></h1>
                     @endif
                     <button
                         class="mb-2 md:mb-0 bg-red-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-800"
@@ -61,11 +64,11 @@
                     @endif
                     <button
                         class="mb-2 md:mb-0 bg-red-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-800"
-                        type="button" aria-label="like"><a href="{{ route('user.following', $user->id) }}">View User Follows</a>
+                        type="button" aria-label="like"><a href="{{ route('user.following', $user->id) }}">See Following</a>
                     </button>
                     <button
                         class="mb-2 md:mb-0 bg-red-700 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-red-800"
-                        type="button" aria-label="like"><a href="{{ route('user.followers', $user->id) }}">See Who They Follow</a>
+                        type="button" aria-label="like"><a href="{{ route('user.followers', $user->id) }}">See Followers</a>
                     </button>
                 </div>
             </div>

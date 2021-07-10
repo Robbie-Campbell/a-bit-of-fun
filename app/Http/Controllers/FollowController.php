@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Follow;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
@@ -25,15 +26,23 @@ class FollowController extends Controller
         return redirect()->back();
     }
 
-    public function following() {
-        $users = Follow::all()->where('follower_id', Auth::id());
+    public function following($id) {
+        $follows = Follow::all()->where('follower_id', $id);
+        $users = [];
+        foreach($follows as $follow) {
+            array_push($users, User::all()->where('id', $follow->user_id)->first());
+        }
         return view('user.follow', [
             'users' => $users,
         ]);
     }
 
-    public function followers() {
-        $users = Follow::all()->where('user_id', Auth::id());
+    public function followers($id) {
+        $follows = Follow::all()->where('user_id', $id);
+        $users = [];
+        foreach($follows as $follow) {
+            array_push($users, User::where('id', $follow->follower_id)->first());
+        }
         return view('user.follow', [
             'users' => $users,
         ]);
