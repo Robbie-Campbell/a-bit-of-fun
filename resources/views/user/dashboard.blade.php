@@ -72,8 +72,8 @@
                     </button>
                 </div>
             </div>
-            @foreach($quotes as $quote)
-                <div class="flex flex-col mt-5">
+            <div class="flex flex-col mt-5">
+                @foreach($quotes as $quote)
                     <div class="bg-white shadow-md  rounded-3xl p-4">
                         <div class="flex-none lg:flex">
                             <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
@@ -154,8 +154,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </main>
 @endsection
